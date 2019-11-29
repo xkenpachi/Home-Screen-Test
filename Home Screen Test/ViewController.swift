@@ -43,6 +43,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             
             collectionView.performBatchUpdates({
                 self.colors.remove(at: sourceIndexPath.item)
+                //47 nci satırda color yerine drag item olarak algılıyor.
                 self.colors.insert(item.dragItem.localObject as! UIColor, at: destionationIndexPath.item)
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destionationIndexPath])
@@ -66,7 +67,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let item = colors[indexPath.item]
         let itemProvider = NSItemProvider(object: item as UIColor)
         let dragItem = UIDragItem(itemProvider: itemProvider)
-        dragItem.localObject = dragItem
+        dragItem.localObject = item
         return[dragItem]
     }
     
@@ -88,7 +89,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         
         if coordinator.proposal.operation == .move {
-//            self.reorderitems(coordinator: coordinator, destionationIndexPath: destIndexPath, collectionView: collectionView)
+            self.reorderitems(coordinator: coordinator, destionationIndexPath: destIndexPath, collectionView: collectionView)
         }
     }
 
